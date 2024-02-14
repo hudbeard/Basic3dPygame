@@ -13,7 +13,7 @@ class Pygame3dEngine:
         self.running = True
         self.scale = 5
         self.center = self.to_screen_coordinates(0, 0)
-        self.camera = Camera(numpy.array([0., 0., 0.]), numpy.array([0., 0., 0.]))
+        self.camera = Camera(numpy.array([0., 0., 0.]), numpy.array([0., 90., 0.]))
         self.camera_clipping_planes = [
             ClippingPlane((0, 0, 1), self.focal_length),
             ClippingPlane((1 / math.sqrt(2), 0, 1 / math.sqrt(2)), 0),
@@ -32,7 +32,7 @@ class Pygame3dEngine:
             triangle = [Triangle(*[int(i) for i in list(row.values())[:3]], row["color"]) for row in reader if
                         row["color"]]
             vertices = numpy.array([[float(i) for i in list(row.values())[:3]] for row in reader if not row["color"]])
-        return Model(vertices, triangle, [0, -5, 0], numpy.array([0, 0, 0]))
+        return Model(vertices, triangle, [-2, 0, 0], numpy.array([0, 0, 0]))
 
     def check_for_quit(self):
         for event in pygame.event.get():
